@@ -1,19 +1,14 @@
 const URLPreview = require("link-preview-js");
 // const handlebars = require("handlebars");
 var exYouTube;
-var exParsedText;
 
-URLPreview.getLinkPreview("https://www.youtube.com/watch?v=MejbOFk7H6c").then(
-  data => (exYouTube = data)
-);
-
-URLPreview.getLinkPreview(
-  "This is a text supposed to be parsed and the first link displayed https://www.youtube.com/watch?v=MejbOFk7H6c"
-).then(data => (exParsedText = data));
-
-if (exYouTube) {
-  console.log(exYouTube);
-}
-if (exParsedText) {
-  console.log(exParsedText);
-}
+URLPreview.getLinkPreview("https://www.youtube.com/watch?v=MejbOFk7H6c")
+  .then(data => {
+    console.log("Logging data inside callback function:");
+    console.log(data);
+    exYouTube = data;
+  })
+  .then(() => {
+    console.log("Logging assigned variable outside of callback function:");
+    console.log(exYouTube);
+  });
