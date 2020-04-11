@@ -4,4 +4,8 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(data.email);
   });
+
+  const messagePanel = document.querySelector("#messagePanel");
+  messagePanel.scrollTop =
+    messagePanel.scrollHeight - messagePanel.clientHeight;
 });
