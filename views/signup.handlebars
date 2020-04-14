@@ -1,0 +1,37 @@
+<div class="uk-container ">
+  <div class="uk-grid title-row">
+    <div class="uk-width-1-1 uk-text-center">
+      <h1 class="top-navi">Aloha Instant Messenger</h1>
+      <a class="navlink" href="/">Login!</a>
+    </div>
+  </div>
+  <div class="uk-grid form-content">
+    <div class="uk-width-1-1 uk-container-center">
+      <h2 class="form-title">Sign Up Form</h2>
+      <form class="signup uk-form">
+        <div class="uk-form-row">
+          <label for="exampleInputEmail1">Email address</label>
+        </div>
+        <div class="uk-form-row">
+          <input type="email" class="uk-form-width-medium uk-input" id="email-input" placeholder="Email">
+        </div>
+        <br>
+        <div class="uk-form-row">
+          <label for="exampleInputPassword1">Password</label>
+        </div>
+        <div class="uk-form-row">
+          <input type="password" class="uk-form-width-medium uk-input" id="password-input" placeholder="Password">
+        </div>
+        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span> <span class="msg"></span>
+        </div>
+        <button type="submit" class="uk-button uk-button-secondary">Sign Up</button>
+      </form>
+      <br>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/signup.js"></script>

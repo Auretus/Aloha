@@ -1,79 +1,54 @@
-    <div class="uk-container uk-container-center">
-        <div class="uk-grid title-row">
-            <div class="uk-width-1-1 uk-text-center">
-                <h1 class="top-navi">Aloha Instant Messenger</h1>
+<div class="uk-container uk-container-center">
+    <div class="uk-grid title-row">
+        <div class="uk-width-1-1 uk-text-center">
+            <h1 class="top-navi">Aloha Instant Messenger</h1>
+            <a class="navlink" href="/logout">Log Out</a>
+        </div>
+    </div>
+    <div class="uk-grid main-content uk-margin-remove-top">
+        <div class="uk-width-1-4 side-panel">
+            <div class="uk-grid user-row">
+                <div class="uk-width-1-1 user-content">
+                    <img src="/images/profile.JPG" alt="avatar" class="uk-border-circle avatar">
+                    <span>currentUser</span>
+                </div>
+            </div>
+            <div class="uk-grid search-bar uk-margin-remove-top">
+                <div class="uk-inline">
+                    <input class="uk-input" type="text" placeholder="Search for a User">
+                    <a class="uk-form-icon uk-form-icon-flip search-icon" href="#" uk-icon="icon: search"></a>
+                </div>
+            </div>
+            <div class="uk-grid active-conversations uk-margin-remove-top">
+                <div class="uk-list-striped" id="conversationList">
+                    {{#each fakeUsers}}
+                        {{> blocks/conversations }}
+                    {{/each}}
+                </div>
             </div>
         </div>
-        <div class="uk-grid main-content">
-            <div class="uk-width-1-4 side-panel">
-                <div class="uk-grid user-row">
-                    <div class="uk-width-1-1 user-content">
-                        <img src="/images/profile.JPG" alt="avatar" height="30px" width="30px" class="uk-border-circle">
-                        <span>Username</span>
-                    </div>
-                </div>
-                <div class="uk-grid search-bar uk-margin-remove-top">
-                    <div class="uk-inline">
-                        <input class="uk-input" type="text" placeholder="Search for a User">
-                        <a class="uk-form-icon uk-form-icon-flip search-icon" href="#" uk-icon="icon: search"></a>
-                    </div>
-                </div>
-                <div class="uk-grid user-online uk-margin-remove-top">
-                    <div class="uk-width-1-1">
-                        <span class="users-online"># of users online</span>
-                    </div>
-                </div>
-                <div class="uk-grid active-conversations uk-margin-remove-top">
-                    <div class="uk-list-striped" id="conversationList">
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                        <a href="#" class="conversation-link"><div class="conversation-item">Bob</div></a>
-                    </div>
+        <div class="uk-width-3-4 main-panel">
+            <div class="uk-grid main-title-row">
+                <div class="uk-width-1-1 uk-text-center active-chat-title">
+                    <span>Chatting with activeUser</span>
                 </div>
             </div>
-            <div class="uk-width-3-4 main-panel">
-                <div class="uk-grid main-title-row">
-                    <div class="uk-width-1-1 uk-text-center active-chat-title">
-                        <span>Chatting with Active User</span>
-                    </div>
+            <div class="message-panel" id="messagePanel">
+                {{#each fakeUsers}}
+                    {{> blocks/chat }}
+                {{/each}}
+            </div>
+            <div class="uk-grid input-div ">
+                <div class="input-area uk-width-3-4">
+                    <textarea class="uk-textarea">Type your message here...</textarea>
                 </div>
-                <div class="uk-grid uk-margin-remove-top">
-                    <div class="uk-width-1-1 message-panel">
-                        <div class="message received speech-bubble-left">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-                        <div class="message sent speech-bubble-right">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-                        <div class="message received speech-bubble-left">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-                        <div class="message sent speech-bubble-right">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-                        <div class="message received speech-bubble-left">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-                        <div class="message sent speech-bubble-right">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="uk-grid input-div">
-                    <div class="input-area uk-width-3-4">
-                        <textarea>Type your message here...</textarea>
-                    </div>
-                    <div class="input-area uk-width-1-4">
-                        <button type="submit">Send</button>
-                    </div>
+                <div class="input-area uk-width-1-4">
+                    <button class="uk-button-secondary sendButton" type="submit">Send</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/members.js"></script>   
