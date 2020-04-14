@@ -6,14 +6,14 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.render("signup");
+    res.render("login");
   });
 
-  app.get("/login", function(req, res) {
+  app.get("/signup", function(req, res) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.render("login");
+    res.render("signup");
   });
   app.get("/members", isAuthenticated, function(req, res) {
     const userData = {
