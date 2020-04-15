@@ -13,5 +13,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   });
+  Conversation.associate = function(models) {
+    Conversation.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
   return Conversation;
 };
