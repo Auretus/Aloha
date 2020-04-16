@@ -2,6 +2,9 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
+// Requiring the js-md5 package for hash generation
+const md5 = require("js-md5");
+
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -18,11 +21,12 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
+    let userHash = 
     db.User.create({
       email: req.body.email,
       password: req.body.password,
       username: req.body.username,
-      avatarUrl: req.body.avatarUrl
+      userHash: md5(req.body.email.trim().toLowerCase())
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -44,13 +48,15 @@ module.exports = function(app) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
+      // let userHash = md5(req.user.email.trim().toLowerCase());
+      // avatarUrl: `https://www.gravatar.com/avatar/${userHash}.jpg?s=50&r=pg&d=identicon`
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
         id: req.user.id,
         username: req.user.username,
-        avatarUrl: req.user.avatarUrl
+        userHash: req.user.userHash
       });
     }
   });
