@@ -2,8 +2,7 @@
 var express = require("express");
 var session = require("express-session");
 var passport = require("./config/passport");
-var io = require("socket.io").listen(app);
-var connections = [];
+var http = require("http");
 
 // Setting up port and requiring models for syncing
 var PORT = process.env.PORT || 8080;
@@ -31,16 +30,27 @@ require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
 
 // IO sockets
+var server = http.createServer(app);
+var io = require("socket.io").listen(server);
+var connections = [];
 io.sockets.on("connection", function(socket) {
   connections.push(socket);
-  console.log("Connected: %s sockets connected");
+  console.log("Connected: %s sockets connected", connections.length);
 
-  connections.splice(connections.indexOf(socket, 1));
-  console.log("Disconnected: %s sockets connected", connections.length);
+  socket.on("disconnect", function(data) {
+    console.log(data);
+    connections.splice(connections.indexOf(socket, 1));
+    console.log("Disconnected: %s sockets connected", connections.length);
+  });
+
+  socket.on("send message", function(data) {
+    console.log(data);
+    io.sockets.emit("new message", { msg: data });
+  });
 });
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
+  server.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
