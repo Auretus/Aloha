@@ -32,7 +32,7 @@ USE alohausers_db;
 CREATE TABLE messages (
 id SERIAL NOT NULL PRIMARY KEY,
 content TEXT NOT NULL,
-user_id INT NOT NULL REFERENCES conversations,
+owner_id INT NOT NULL REFERENCES conversations,
 created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 INDEX(created_at DESC)
 
