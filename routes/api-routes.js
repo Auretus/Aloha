@@ -21,7 +21,6 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
-    let userHash = 
     db.User.create({
       email: req.body.email,
       password: req.body.password,
@@ -48,8 +47,6 @@ module.exports = function(app) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
-      // let userHash = md5(req.user.email.trim().toLowerCase());
-      // avatarUrl: `https://www.gravatar.com/avatar/${userHash}.jpg?s=50&r=pg&d=identicon`
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
