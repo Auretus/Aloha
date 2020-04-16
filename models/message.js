@@ -15,5 +15,6 @@ module.exports = function(sequelize, DataTypes) {
   });
   Message.associate = models => {
     models.Message.belongsTo(models.Conversation);
+    models.Message.belongsTo(models.User);
   };
 };

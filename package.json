@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Auretus/project-2-repo.git"
+    "url": "git+https://github.com/Auretus/Aloha.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Auretus/project-2-repo/issues"
+    "url": "https://github.com/Auretus/Aloha/issues"
   },
-  "homepage": "https://github.com/Auretus/project-2-repo#readme",
+  "homepage": "https://github.com/Auretus/Aloha#readme",
   "dependencies": {
     "@giphy/js-brand": "^1.1.7",
     "@giphy/js-components": "^3.0.3",
