@@ -5,7 +5,6 @@ var passport = require("./config/passport");
 var io = require("socket.io").listen(app);
 var connections = [];
 
-
 // Setting up port and requiring models for syncing
 var PORT = process.env.PORT || 8080;
 var db = require("./models");
@@ -37,7 +36,7 @@ io.sockets.on("connection", function(socket) {
   console.log("Connected: %s sockets connected");
 
   connections.splice(connections.indexOf(socket, 1));
-  console.log("Disconnected: %s sockets connected", connections.length)
+  console.log("Disconnected: %s sockets connected", connections.length);
 });
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {
