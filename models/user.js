@@ -22,10 +22,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true
     },
-    avatarUrl: {
+    userHash: {
       type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: "https://www.w3schools.com/howto/img_avatar.png"
+      allowNull: true
     }
   });
   User.associate = function(models) {
