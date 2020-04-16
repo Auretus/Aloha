@@ -28,6 +28,7 @@
     "@types/throttle-debounce": "^2.1.0",
     "ajv": "^5.5.2",
     "bcryptjs": "2.4.3",
+    "bufferutil": "^4.0.1",
     "dompurify": "^2.0.8",
     "dotenv": "^8.2.0",
     "emotion": "^10.0.27",
@@ -42,7 +43,9 @@
     "passport-local": "^1.0.0",
     "pexels-api-wrapper": "^1.1.1",
     "sequelize": "^5.21.6",
-    "throttle-debounce": "^2.1.0"
+    "throttle-debounce": "^2.1.0",
+    "utf-8-validate": "^5.0.2",
+    "ws": "^7.2.3"
   },
   "devDependencies": {
     "chai": "^4.1.2",
