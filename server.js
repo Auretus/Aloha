@@ -4,7 +4,6 @@ var session = require("express-session");
 var passport = require("./config/passport");
 var http = require("http");
 
-
 // Setting up port and requiring models for syncing
 var PORT = process.env.PORT || 8080;
 var db = require("./models");
@@ -31,7 +30,7 @@ require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
 
 // IO sockets
-var server = http.createServer(app)
+var server = http.createServer(app);
 var io = require("socket.io").listen(server);
 var connections = [];
 io.sockets.on("connection", function(socket) {
@@ -39,6 +38,7 @@ io.sockets.on("connection", function(socket) {
   console.log("Connected: %s sockets connected", connections.length);
 
   socket.on("disconnect", function(data) {
+    console.log(data);
     connections.splice(connections.indexOf(socket, 1));
     console.log("Disconnected: %s sockets connected", connections.length);
   });
