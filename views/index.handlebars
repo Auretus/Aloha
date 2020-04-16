@@ -38,17 +38,23 @@
                     {{> blocks/chat }}
                 {{/each}}
             </div>
-            <div class="uk-grid input-div ">
+            <form class="uk-grid input-div" id="messageForm">
                 <div class="input-area uk-width-3-4">
-                    <textarea class="uk-textarea">Type your message here...</textarea>
+                    <textarea class="uk-textarea" id="message">Type your message here...</textarea>
                 </div>
                 <div class="input-area uk-width-1-4">
-                    <button class="uk-button-secondary sendButton" type="submit">Send</button>
+                    <button class="uk-button-secondary sendButton" id="messageSubmit" type="submit">Send</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/members.js"></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script type="text/javascript" src="js/members.js"></script>
+<script>
+        $(function(){
+            var socket = io.connect();
+            var $messageForm = $("#messageForm");
+            var $
+        })
+    </script>   
