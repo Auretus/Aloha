@@ -6,7 +6,7 @@ $(document).ready(function() {
     $(".userAvatar").attr("src", data.avatarUrl);
   });
 
-  const messagePanel = document.querySelector("#messagePanel");
+  const messagePanel = document.querySelector("#chat");
   messagePanel.scrollTop =
     messagePanel.scrollHeight - messagePanel.clientHeight;
 });

@@ -30,10 +30,10 @@
         <div class="uk-width-3-4 main-panel">
             <div class="uk-grid main-title-row">
                 <div class="uk-width-1-1 uk-text-center active-chat-title">
-                    <span>Chatting with activeUser</span>
+                    <span>Chatting with Conversation</span>
                 </div>
             </div>
-            <div class="message-panel" id="messagePanel">
+            <div class="message-panel" id="chat">
                 {{#each fakeUsers}}
                     {{> blocks/chat }}
                 {{/each}}
@@ -55,6 +55,20 @@
         $(function(){
             var socket = io.connect();
             var $messageForm = $("#messageForm");
-            var $
+            var $message = $("#message");
+            var $chat = $("#chat");
+            
+
+            $messageForm.submit(function(e){
+                e.preventDefault();
+                socket.emit("send message", $message.val());
+                $message.val("");
+            });
+            socket.on("new message", function(data){
+                var $messBubbLeft = $(`<div class='message received speech-bubble-left'><p> ${data.msg} </p></div>`);
+                var $messBubbRight = $(`<div class='message sent speech-bubble-right'><p> ${data.msg} </p></div>`);
+                $chat.append($messBubbLeft);
+                $chat.append($messBubbRight);
+            })
         })
     </script>   
