@@ -29,7 +29,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   User.associate = function(models) {
-    User.hasMany(models.Conversation, {
+    User.belongsToMany(models.Conversation, {
+      through: "UserConversation",
       onDelete: "cascade"
     });
   };

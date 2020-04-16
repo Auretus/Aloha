@@ -17,4 +17,5 @@ module.exports = function(sequelize, DataTypes) {
     models.Message.belongsTo(models.Conversation);
     models.Message.belongsTo(models.User);
   };
+  return Message;
 };

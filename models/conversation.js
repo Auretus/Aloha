@@ -10,6 +10,9 @@ module.exports = function(sequelize, DataTypes) {
     models.Conversation.hasMany(models.Message, {
       onDelete: "cascade"
     });
-    models.Conversation.hasMany(models.User);
+    models.Conversation.belongsToMany(models.User, {
+      through: "UserConversation"
+    });
   };
+  return Conversation;
 };
