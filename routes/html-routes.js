@@ -1,104 +1,42 @@
+var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
-const userData = {
-  fakeUsers: [
-    {
-      username: "MariaThalia",
-      avatarUrl: "https://www.w3schools.com/howto/img_avatar.png",
-      messagesSent: [
-        {
-          message: "Hello"
-        },
-        {
-          message: "My name is Maria"
-        },
-        {
-          message: "Nice to meet you"
-        }
-      ],
-      activeChat: false
-    },
-    {
-      username: "JosiePosie",
-      avatarUrl: "https://www.w3schools.com/howto/img_avatar.png",
-      messagesSent: [
-        {
-          message: "Hello"
-        },
-        {
-          message: "My name is Josie"
-        },
-        {
-          message: "Nice to meet you"
-        }
-      ],
-      activeChat: false
-    },
-    {
-      username: "AnnaBanana",
-      avatarUrl: "https://www.w3schools.com/howto/img_avatar.png",
-      messagesSent: [
-        {
-          message: "Hello"
-        },
-        {
-          message: "My name is Anna"
-        },
-        {
-          message: "Nice to meet you"
-        }
-      ],
-      activeChat: false
-    },
-    {
-      username: "MarcoDarko",
-      avatarUrl: "https://www.w3schools.com/howto/img_avatar.png",
-      messagesSent: [
-        {
-          message: "Hello"
-        },
-        {
-          message: "My name is Marco"
-        },
-        {
-          message: "Nice to meet you"
-        }
-      ],
-      activeChat: false
-    },
-    {
-      username: "RandyPandy",
-      avatarUrl: "https://www.w3schools.com/howto/img_avatar.png",
-      messagesSent: [
-        {
-          message: "Hello"
-        },
-        {
-          message: "My name is Randy"
-        },
-        {
-          message: "Nice to meet you"
-        }
-      ],
-      activeChat: false
-    }
-  ]
-};
 
 module.exports = function(app) {
   app.get("/", function(req, res) {
     // if (req.user) {
-    //   res.render("index", userData);
+    //   res.redirect("/members");
     // }
     res.render("login");
   });
 
   app.get("/signup", function(req, res) {
     // if (req.user) {
-    //   res.render("/members");
+    //   res.redirect("/members");
     // }
     res.render("signup");
   });
   app.get("/members", isAuthenticated, function(req, res) {
-    res.render("index", userData);
+    db.User.findAll({}).then(function(data) {
+      var userObject = {
+        users: data
+      };
+      db.Conversation.findAll({}).then(function(data1) {
+        var convObject = {
+          conversations: data1
+        };
+        db.Message.findAll({}).then(function(data2) {
+          var messObject = {
+            messages: data2
+          };
+          var hbsObject = {
+            users: userObject,
+            conversations: convObject,
+            messages: messObject
+          };
+          console.log(hbsObject);
+          res.render("index", hbsObject);
+        });
+      });
+    });
   });
 };

@@ -4,6 +4,18 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    participant1: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    participant2: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   });
   Conversation.associate = models => {
