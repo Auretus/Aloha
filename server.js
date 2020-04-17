@@ -28,6 +28,8 @@ app.use(passport.session());
 // Requiring our routes
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
+require("./routes/conversation-api-routes.js")(app);
+require("./routes/message-api-routes.js")(app);
 
 // IO sockets
 var server = http.createServer(app);
@@ -46,6 +48,11 @@ io.sockets.on("connection", function(socket) {
   socket.on("send message", function(data) {
     console.log(data);
     io.sockets.emit("new message", { msg: data });
+  });
+
+  socket.on("send conversation", function(data) {
+    console.log(data);
+    io.sockets.emit("new conversation", { con: data });
   });
 });
 // Syncing our database and logging a message to the user upon success

@@ -14,17 +14,16 @@
                 </div>
             </div>
             <div class="uk-grid search-bar uk-margin-remove-top">
-                <div class="uk-inline uk-width-4-5 uk-padding-remove-left uk-margin-top">
-                    <select class="js-example-theme-single" style="width: 100%" name="user">
+                <div class="uk-inline uk-width-5-6 uk-padding-remove-left uk-margin-top">
+                    <select id="selectedUser" class="js-example-theme-single" style="width: 100%" name="user">
                         <option value="">Select a User to Message</option>
                         {{#each users.users}}
                             {{> blocks/user }}
                         {{/each}}
                     </select>
-                    
                 </div>
-                <div class="uk-width-1-5">
-                    <a class="uk-form-icon uk-form-icon-flip cross-icon" href="#" uk-icon="icon: cross"></a>
+                <div class="uk-width-1-6 uk-padding-remove-left uk-position-relative">
+                    <a id="plusIcon" class="uk-form-icon uk-icon-secondary uk-form-icon-flip plus-icon" href="#" uk-icon="icon: plus; ratio: 2"></a>
                 </div>
             </div>
             <div class="uk-grid active-conversations uk-margin-remove-top">
@@ -58,28 +57,4 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script type="text/javascript" src="js/members.js"></script>
-<script>
-        $(function(){
-            var socket = io.connect();
-            var $messageForm = $("#messageForm");
-            var $message = $("#message");
-            var $chat = $("#chat");
-            
-
-            $messageForm.submit(function(e){
-                e.preventDefault();
-                socket.emit("send message", $message.val());
-                $message.val("");
-            });
-            socket.on("new message", function(data){
-                var $messBubbLeft = $(`<div class='message received speech-bubble-left'><p> ${data.msg} </p></div>`);
-                var $messBubbRight = $(`<div class='message sent speech-bubble-right'><p> ${data.msg} </p></div>`);
-                $chat.append($messBubbLeft);
-                $chat.append($messBubbRight);
-            });
-        });
-        $(".js-example-theme-single").select2({
-            theme: "classic"
-        });
-    </script>   
+<script type="text/javascript" src="js/members.js"></script>  
