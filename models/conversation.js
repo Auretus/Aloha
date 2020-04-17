@@ -11,7 +11,9 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
     models.Conversation.belongsToMany(models.User, {
-      through: "UserConversation"
+      as: [conversation],
+      through: [userConversation],
+      foreignKey: "conversationRowId"
     });
   };
   return Conversation;
