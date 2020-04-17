@@ -1,6 +1,10 @@
+/* eslint-disable prettier/prettier */
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+
+// Requiring the js-md5 package for hash generation
+const md5 = require("js-md5");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -18,11 +22,14 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
+    let userHash = md5(req.body.email.trim().toLowerCase());
+    // console.log(userHash);
+    
     db.User.create({
       email: req.body.email,
       password: req.body.password,
       username: req.body.username,
-      avatarUrl: req.body.avatarUrl
+      userHash: userHash
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -50,7 +57,7 @@ module.exports = function(app) {
         email: req.user.email,
         id: req.user.id,
         username: req.user.username,
-        avatarUrl: req.user.avatarUrl
+        userHash: req.user.userHash
       });
     }
   });
