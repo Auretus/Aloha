@@ -96,6 +96,9 @@ body {
   height: 75px;
   border-bottom: solid white;
 }
+#plusIcon{
+  color: white;
+}
 .side-panel, .main-panel {
   background-color: rgba(0, 110, 255);
   color: white;
