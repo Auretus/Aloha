@@ -8,6 +8,14 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    participant1: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    participant2: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   });
   Conversation.associate = models => {

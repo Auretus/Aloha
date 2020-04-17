@@ -7,7 +7,10 @@ module.exports = function(app) {
     }).then(res.json());
   });
   app.post("/api/messages", function(req, res) {
-    db.Message.create(req.body).then(function(newMess) {
+    console.log(req.body);
+    db.Message.create({
+      content: req.body
+    }).then(function(newMess) {
       res.json(newMess);
     });
   });

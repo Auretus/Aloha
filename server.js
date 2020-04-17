@@ -30,6 +30,7 @@ require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
 require("./routes/conversation-api-routes.js")(app);
 require("./routes/message-api-routes.js")(app);
+require("./routes/user-api-routes.js")(app);
 
 // IO sockets
 var server = http.createServer(app);

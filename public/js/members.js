@@ -12,7 +12,7 @@ $(document).ready(function() {
     e.preventDefault();
     socket.emit("send message", $message.val());
     $.post("/api/messages", {
-      content: $message.val()
+      content: req.body
     }).then(function(data) {
       console.log(data);
     });
@@ -39,25 +39,48 @@ $(document).ready(function() {
 
   const chat = document.querySelector("#chat");
   chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+  // function getUserGravatar(){
+  //   $.get("/api/users", function(data) {
+  //     var userHash;
+  //     for (i=0;i<data.length;i++){
 
+  //     }
+  //   });
+  // }
+  // getUserGravatar();
   $("#plusIcon").on("click", function(e) {
     e.preventDefault();
     var user = $("#selectedUser").val();
+    var currentUser = $(".currentUsername").text();
+    // var currentGravatar = $(".userAvatar").attr("src");
+
     console.log(user);
-    socket.emit("send conversation", user);
-    if (!user) {
-      return;
+    if (user !== "" && user !== currentUser) {
+      socket.emit("send conversation", [
+        `${user} & ${currentUser}`,
+        user,
+        currentUser
+      ]);
+      $.post("/api/conversations", {
+        name: user + " & " + currentUser,
+        participant1: currentUser,
+        participant2: user
+      }).then(function(data) {
+        console.log(data);
+      });
     }
-    $.post("/api/conversations", { name: user }).then(function(data) {
-      console.log(data);
-    });
-    user.val("");
+    $("#selectedUser").prop("selectedIndex", 0);
   });
   socket.on("new conversation", function(data) {
     var $convoList = $("#conversationList");
+    var currentUser = $(".currentUsername").text();
+    var user = $("#selectedUser").val();
+    var name = `${user} & ${currentUser}`;
+    // var gravatar = $(".userAvatar").attr("src");
     var $newConvo = $(`<a href="#" class="conversation-link">
-    <div class="conversation-item">
-        <img class="uk-border-circle avatar" src="${data.con}">${data.con}</div></a>`);
-    $convoList.append($newConvo);
+    <div class="conversation-item">${data.con[0]}</div></a>`);
+    if (data.con[0] !== name) {
+      $convoList.append($newConvo);
+    }
   });
 });

@@ -10,6 +10,7 @@ module.exports = function(app) {
     });
   });
   app.post("/api/conversations", function(req, res) {
+    console.log(req.body);
     db.Conversation.create(req.body).then(function(newConv) {
       res.json(newConv);
     });
