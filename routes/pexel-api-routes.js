@@ -1,8 +1,6 @@
 require("dotenv").config();
 const PexelsAPI = require("pexels-api-wrapper");
-var pexelsClient = new PexelsAPI(
-  "563492ad6f917000010000015a007adfef72497f8528d58257792ed9"
-);
+var pexelsClient = new PexelsAPI(process.env.PEXELS_API_KEY);
 var store = require("store");
 
 module.exports = function(app) {
