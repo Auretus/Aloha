@@ -1,10 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 0e38eaab3a24dfe49b1bf14beace7401940476b8
 // Requiring necessary npm packages
 var express = require("express");
 var session = require("express-session");
