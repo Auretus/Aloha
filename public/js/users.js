@@ -13,15 +13,19 @@ $(document).ready(function() {
       $.get("/api/users", function(data) {
         for (i = 0; i < data.length; i++) {
           if (data[i].username !== activeUser) {
-            var userTab = $(`<a href="#" id="${data[i].id}" class="conversation-link">
-                <div class="conversation-item">
-                    <img class="uk-border-circle avatar" src="https://www.gravatar.com/avatar/${data[i].userHash}.jpg?s=50&r=pg&d=identicon">
-                    ${data[i].username}
-                </div>
-            </a>`);
+            var userTab = $(`<div class="conversation-item" data-id="${data[i].id}" data-src="https://www.gravatar.com/avatar/${data[i].userHash}.jpg?s=50&r=pg&d=identicon"><a href="#" id="${data[i].id}" class="conversation-link"><img class="uk-border-circle avatar" src="https://www.gravatar.com/avatar/${data[i].userHash}.jpg?s=50&r=pg&d=identicon">
+                    ${data[i].username}</a></div>`);
             userList.append(userTab);
           }
         }
+        $(".conversation-item").on("click", function() {
+          var convoObject = {
+            userId: parseInt($(this).attr("data-id")),
+            activeUserId: result.id
+          };
+          $.post("/api/conversations", convoObject);
+          console.log(convoObject);
+        });
       });
     });
   }
