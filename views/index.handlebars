@@ -38,6 +38,21 @@
             <div class="uk-grid main-title-row">
                 <div class="uk-width-1-1 uk-text-center active-chat-title">
                     <span>Chatting Window</span>
+                    <button class="uk-button uk-button-secondary uk-right" id="changeBg" >Change Background</button>
+                </div>
+                <div id="bgmodal" class="modal-overflow uk-modal">
+                    <div class="uk-modal-dialog">
+                        <div class="uk-modal-header">
+                            <h2 class="uk-modal-title">Change Chat Background</h2>
+                            <input class="uk-input uk-width-3-4" id="themeInput" name="theme">
+                            <a id="searchIcon" class="search-icon" href="#" uk-icon="icon: search; ratio: 2.5"></a>
+                        </div>
+                        <div class="uk-modal-body uk-overflow-auto" id="bgOptions">
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                            <button class="uk-button uk-button-secondary uk-modal-close" type="button">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="message-panel" id="chat">
@@ -57,4 +72,5 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script type="text/javascript" src="js/members.js"></script>  
+<script type="text/javascript" src="js/members.js"></script>
+<script type="text/javascript" src="js/pexelAPI.js"></script>

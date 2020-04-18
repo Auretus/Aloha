@@ -99,6 +99,10 @@ body {
 #plusIcon{
   color: white;
 }
+#changeBg {
+  position: relative;
+  top: 2%
+}
 .side-panel, .main-panel {
   background-color: rgba(0, 110, 255);
   color: white;

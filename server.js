@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 // Requiring necessary npm packages
 var express = require("express");
 var session = require("express-session");
@@ -31,6 +34,7 @@ require("./routes/api-routes.js")(app);
 require("./routes/conversation-api-routes.js")(app);
 require("./routes/message-api-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
+require("./routes/pexel-api-routes.js")(app);
 
 // IO sockets
 var server = http.createServer(app);
