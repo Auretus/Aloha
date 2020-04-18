@@ -18,6 +18,9 @@ values
 (2,2),
 (3,2),
 (3,3),
-(3,4),
+(4,3),
 (4,4),
 (1,4);
+insert into messages (content, createdAt, updatedAt, ConversationId, UserId)
+values
+("Hello, Bob!", now(), now(), 1, 1);

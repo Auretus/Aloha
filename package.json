@@ -21,17 +21,9 @@
   },
   "homepage": "https://github.com/Auretus/Aloha#readme",
   "dependencies": {
-    "@giphy/js-brand": "^1.1.7",
-    "@giphy/js-components": "^3.0.3",
-    "@giphy/js-fetch-api": "^1.5.7",
-    "@giphy/js-types": "^2.0.2",
-    "@types/throttle-debounce": "^2.1.0",
     "ajv": "^5.5.2",
     "bcryptjs": "2.4.3",
-    "bufferutil": "^4.0.1",
-    "dompurify": "^2.0.8",
     "dotenv": "^8.2.0",
-    "emotion": "^10.0.27",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.16.1",
@@ -40,15 +32,12 @@
     "link-preview-js": "^2.0.1",
     "memorable-moniker": "^0.2.7",
     "mysql2": "^1.6.5",
-    "npm-check-updates": "^4.1.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pexels-api-wrapper": "^1.1.1",
     "sequelize": "^5.21.6",
     "socket.io": "^2.3.0",
-    "throttle-debounce": "^2.1.0",
-    "utf-8-validate": "^5.0.2",
-    "ws": "^7.2.3"
+    "store": "^2.0.12"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -57,7 +46,6 @@
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.2",
-    "jest": "^25.3.0",
     "mocha": "^7.1.1",
     "prettier": "^1.13.7"
   }

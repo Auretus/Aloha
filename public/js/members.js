@@ -62,7 +62,7 @@ $(document).ready(function() {
         currentUser
       ]);
       $.post("/api/conversations", {
-        name: user + " & " + currentUser,
+        // name: user + " & " + currentUser,
         participant1: currentUser,
         participant2: user
       }).then(function(data) {
