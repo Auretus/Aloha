@@ -1,7 +1,4 @@
 $(document).ready(function() {
-  // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
-  var socket = io.connect();
   var $messageForm = $("#messageForm");
   var $message = $("#message");
   var $chat = $("#chat");
@@ -27,27 +24,10 @@ $(document).ready(function() {
     );
     $chat.append($messBubbLeft);
     $chat.append($messBubbRight);
+    const chat = document.querySelector("#chat");
+    chat.scrollTop = chat.scrollHeight - chat.clientHeight;
   });
 
-  $.get("/api/user_data").then(function(data) {
-    $(".currentUsername").text(data.username);
-    $(".userAvatar").attr(
-      "src",
-      `https://www.gravatar.com/avatar/${data.userHash}.jpg?s=50&r=pg&d=identicon`
-    );
-  });
-
-  const chat = document.querySelector("#chat");
-  chat.scrollTop = chat.scrollHeight - chat.clientHeight;
-  // function getUserGravatar(){
-  //   $.get("/api/users", function(data) {
-  //     var userHash;
-  //     for (i=0;i<data.length;i++){
-
-  //     }
-  //   });
-  // }
-  // getUserGravatar();
   $("#plusIcon").on("click", function(e) {
     e.preventDefault();
     var user = $("#selectedUser").val();
@@ -70,17 +50,5 @@ $(document).ready(function() {
       });
     }
     $("#selectedUser").prop("selectedIndex", 0);
-  });
-  socket.on("new conversation", function(data) {
-    var $convoList = $("#conversationList");
-    var currentUser = $(".currentUsername").text();
-    var user = $("#selectedUser").val();
-    var name = `${user} & ${currentUser}`;
-    // var gravatar = $(".userAvatar").attr("src");
-    var $newConvo = $(`<a href="#" class="conversation-link">
-    <div class="conversation-item">${data.con[0]}</div></a>`);
-    if (data.con[0] !== name) {
-      $convoList.append($newConvo);
-    }
   });
 });
