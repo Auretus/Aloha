@@ -20,7 +20,10 @@ module.exports = function(app) {
   });
   app.get("/api/pexels/store", function(req, res) {
     // console.log(req.user);
-    if (!store.get(req.user.id) || store.get(req.user.id).name != req.user.id) {
+    if (
+      !store.get(req.user.id) ||
+      store.get(req.user.id).name !== req.user.id
+    ) {
       res.send({});
     } else {
       store.each(function(value, key) {
