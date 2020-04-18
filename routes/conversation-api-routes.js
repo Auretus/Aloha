@@ -6,6 +6,7 @@ module.exports = function(app) {
     // outputs: conversationId (int)
 
     // let's see what we have to work with
+    console.log("Incoming request body:");
     console.log(req.body);
 
     // first, grab the userIds by searching on the username field
@@ -21,16 +22,23 @@ module.exports = function(app) {
     });
 
     // then, look for a conversationId that references both userIDs
-    let conversationID = db.query(
-      `SELECT ConversationId FROM userConversations 
-      WHERE UserId=? or UserId=? 
-      GROUP BY ConversationId 
-      HAVING COUNT(*)>1;`,
-      {
-        replacements: [user1, user2],
-        type: QueryTypes.SELECT
-      }
-    );
+    // const { Op } = require("sequelize");
+    let conversationID = db.UserConversation.findOne({
+      where: {
+        $or: [{ UserId: user1 }, { UserId: user2 }]
+      },
+      group: "ConversationId",
+      having: "COUNT(*)>1"
+    });
+    // let conversationID = sequelize.query(
+    // `SELECT ConversationId FROM userConversations
+    // WHERE UserId=? or UserId=?
+    // GROUP BY ConversationId
+    // HAVING COUNT(*)>1;`,
+    // {
+    //   replacements: [user1, user2]
+    // }
+    // );
 
     console.log(`Conversation ID after query: ${conversationID}`);
     if (conversationID === null) {
