@@ -11,14 +11,6 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 560]
       },
       allowNull: false
-    },
-    user: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    conversation: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   });
   Message.associate = models => {
