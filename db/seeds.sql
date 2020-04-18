@@ -5,12 +5,12 @@ values
 ('bob@bob.com', '$2a$10$E3qEyS5/ni11fMFzCeWdLeJvyVLA7UXM/L/50wVJDXyeaoPAFtHiS', 'bob', '820d0e4ee14e986a44d33782ca852f51'),
 ('carol@bob.com', '$2a$10$GiLNPkkFnaGBv9Fz9mIL6ewUUHxu/DV9edj.1zgtncyDfCyyMow8m', 'carol', '0c9bb3db826bd7ff9e08d1e16ffe63ce'),
 ('david@bob.com', '$2a$10$vUwwjkbV8lh6oEmPWyqef.7izAZNNhHQbQU35/PxJSBCOMTopTFjC', 'david', 'a4d1b6f05c16958e4f31934493aac5ae');
-insert into conversations (name, createdAt, updatedAt)
+insert into conversations (createdAt, updatedAt)
 values
-('excited-goosander', now(), now()),
-('emphatic-sardine', now(), now()), 
-('energetic-mosquito', now(), now()),
-('delightful-dog', now(), now());
+(now(), now()),
+(now(), now()), 
+(now(), now()),
+(now(), now());
 insert into userConversations (UserId, ConversationId)
 values
 (1,1),
