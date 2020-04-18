@@ -29,7 +29,9 @@ module.exports = function(sequelize, DataTypes) {
   });
   User.associate = function(models) {
     User.belongsToMany(models.Conversation, {
-      through: "UserConversation",
+      as: [participant],
+      through: [userConversation],
+      foreignKey: "userRowId",
       onDelete: "cascade"
     });
   };
