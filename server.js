@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
 // Requiring necessary npm packages
 var express = require("express");
 var session = require("express-session");
@@ -35,6 +34,7 @@ require("./routes/api-routes.js")(app);
 require("./routes/conversation-api-routes.js")(app);
 require("./routes/message-api-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
+require("./routes/pexel-api-routes.js")(app);
 
 // IO sockets
 var server = http.createServer(app);
@@ -42,10 +42,12 @@ var io = require("socket.io").listen(server);
 var connections = [];
 io.sockets.on("connection", function(socket) {
   connections.push(socket);
+  io.sockets.emit("new user online");
   console.log("Connected: %s sockets connected", connections.length);
 
   socket.on("disconnect", function(data) {
     console.log(data);
+    io.sockets.emit("user has logged off");
     connections.splice(connections.indexOf(socket, 1));
     console.log("Disconnected: %s sockets connected", connections.length);
   });

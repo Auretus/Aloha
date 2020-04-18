@@ -1,4 +1,5 @@
 ![Screenshot](screen3.png)
+
 ![Screenshot](screen1.png)
 
 # Description
@@ -14,7 +15,7 @@ See who is online and start a chat.
 # Getting Started / Prerequisites
 To install dependencies make sure to run:
 
-npm i
+    npm i
 
 Install MySql Workbench to handle the databases.
 To use this app, run locally in your browser. Visit: localhost:8080

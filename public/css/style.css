@@ -96,8 +96,13 @@ body {
   height: 75px;
   border-bottom: solid white;
 }
-#plusIcon{
+.selectUser{
   color: white;
+  font-weight: bold;
+}
+#changeBg {
+  position: relative;
+  top: 2%
 }
 .side-panel, .main-panel {
   background-color: rgba(0, 110, 255);
