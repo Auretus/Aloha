@@ -15,10 +15,25 @@ $(document).ready(function() {
   function getPictures() {
     $.ajax(settings).then(function(res) {
       for (i = 0; i < res.photos.length; i++) {
-        console.log(res.photos[i].src.large);
+        pictureArray.push(res.photos[i].src.large);
       }
+      return pictureArray;
     });
   }
   getPictures();
-  $("#bgOptions");
+  for (i = 0; i < pictureArray.length; i++) {
+    var picThumb = $(
+      `<a href="#" id="bgPic" value="${pictureArray[i]}"><img src="${pictureArray[i]}" height="100px" width="100"></a><br>`
+    );
+    console.log(picThumb);
+    $("#bgOptions").append(picThumb);
+  }
+  console.log(pictureArray);
+
+  $("#bgPic").on("click", function(e) {
+    e.preventDefault();
+    var imageSource = $(this).val();
+    $("#chat").css("background-image", `url('${imageSource}')`);
+    UIkit.modal($("#bgmodal")).hide();
+  });
 });
