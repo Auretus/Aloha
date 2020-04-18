@@ -4,6 +4,7 @@ module.exports = function(sequelize) {
     models.Conversation.hasMany(models.Message, {
       onDelete: "cascade"
     });
+    models.Conversation.hasMany(models.User);
   };
   return Conversation;
 };

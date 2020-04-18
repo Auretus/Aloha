@@ -1,6 +1,4 @@
 var db = require("../models");
-const sequelize = require("sequelize");
-const { Op } = require("sequelize");
 
 module.exports = function(app) {
   app.post("/api/conversations", function(req, res) {
@@ -16,32 +14,44 @@ module.exports = function(app) {
     let user2 = 2;
 
     // then, look for a conversationId that references both userIDs
-    // const { Op } = require("sequelize");
-    let conversationID = db.UserConversation.findOne({
-      where: {
-        [Op.or]: [{ UserId: { [Op.eq]: user1 } }, { UserId: { [Op.eq]: user2 } }]
-      },
-      group: "ConversationId",
-      having: [db.sequelize.fn("COUNT", db.sequelize.col("ConversationId")>1")]
-    })
-      // console.log(db);
 
-      // let conversationID = db.sequelize
-      //   .query(
-      //     "SELECT ConversationId FROM userConversations \
-      // WHERE UserId=? or UserId=? \
-      // GROUP BY ConversationId \
-      // HAVING COUNT(*)>1;",
-      //     {
-      //       replacements: [user1, user2],
-      //       type: db.sequelize.QueryTypes.SELECT
-      //     }
-      //   )
-      .then(userConversation => {
-        console.log(
-          `Conversation ID after query: ${userConversation.conversationID}`
+    db.Conversation.findAll({
+      include: [db.Message, db.User]
+    }).then(result => {
+      const convos = result.filter(convo => {
+        return (
+          convo.Users.indexOf(user1) > -1 || convo.Users.indexOf(user2) > -1
         );
       });
+
+      res.json(convos);
+    });
+    // const { Op } = require("sequelize");
+    // let conversationID = db.UserConversation.findOne({
+    //   where: {
+    //     [Op.or]: [{ UserId: { [Op.eq]: user1 } }, { UserId: { [Op.eq]: user2 } }]
+    //   },
+    //   group: "ConversationId",
+    //   having: [db.sequelize.fn("COUNT", db.sequelize.col("ConversationId")>1")]
+    // })
+    // console.log(db);
+
+    // let conversationID = db.sequelize
+    //   .query(
+    //     "SELECT ConversationId FROM userConversations \
+    // WHERE UserId=? or UserId=? \
+    // GROUP BY ConversationId \
+    // HAVING COUNT(*)>1;",
+    //     {
+    //       replacements: [user1, user2],
+    //       type: db.sequelize.QueryTypes.SELECT
+    //     }
+    //   )
+    // .then(userConversation => {
+    //   console.log(
+    //     `Conversation ID after query: ${userConversation.conversationID}`
+    //   );
+    // });
 
     if (conversationID === null) {
       // create a new conversation
