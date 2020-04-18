@@ -10,6 +10,7 @@ module.exports = function(app) {
         type: QueryTypes.SELECT
       }
     );
+    res.json(conversationID);
   });
   db.Conversation.create(req.body).then(function(newConv) {
     res.json(newConv);
