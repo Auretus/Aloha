@@ -1,5 +1,5 @@
 var db = require("../models");
-const sequelize = require("sequelize");
+// const sequelize = require("sequelize");
 const { Op } = require("sequelize");
 
 module.exports = function(app) {
@@ -19,10 +19,13 @@ module.exports = function(app) {
     // const { Op } = require("sequelize");
     let conversationID = db.UserConversation.findOne({
       where: {
-        [Op.or]: [{ UserId: { [Op.eq]: user1 } }, { UserId: { [Op.eq]: user2 } }]
+        [Op.or]: [
+          { UserId: { [Op.eq]: user1 } },
+          { UserId: { [Op.eq]: user2 } }
+        ]
       },
       group: "ConversationId",
-      having: [db.sequelize.fn("COUNT", db.sequelize.col("ConversationId")>1")]
+      having: [db.sequelize.fn("COUNT", db.sequelize.col("ConversationId") > 1)]
     })
       // console.log(db);
 
