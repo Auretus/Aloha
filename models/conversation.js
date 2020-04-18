@@ -5,8 +5,12 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
+    participant1: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    participant2: {
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   });

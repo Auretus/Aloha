@@ -7,9 +7,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     content: {
       type: DataTypes.TEXT,
-      validate: {
-        len: [1, 560]
-      },
+      allowNull: false
+    },
+    author: {
+      type: DataTypes.STRING,
       allowNull: false
     }
   });

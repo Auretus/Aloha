@@ -9,9 +9,10 @@ module.exports = function(app) {
   app.post("/api/messages", function(req, res) {
     console.log(req.body);
     db.Message.create({
-      content: req.body
+      content: req.body.content,
+      author: req.body.author
     }).then(function(newMess) {
-      res.json(newMess);
+      res.send(newMess);
     });
   });
 };
