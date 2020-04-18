@@ -1,4 +1,6 @@
 var db = require("../models");
+const sequelize = require("sequelize");
+const { Op } = require("sequelize");
 
 module.exports = function(app) {
   app.post("/api/conversations", function(req, res) {
@@ -10,37 +12,37 @@ module.exports = function(app) {
     console.log(req.body);
 
     // first, grab the userIds by searching on the username field
-    let user1 = db.User.findOne({
-      where: {
-        username: req.body.participant1
-      }
-    });
-    let user2 = db.User.findOne({
-      where: {
-        username: req.body.participant2
-      }
-    });
+    let user1 = 1;
+    let user2 = 2;
 
     // then, look for a conversationId that references both userIDs
     // const { Op } = require("sequelize");
     let conversationID = db.UserConversation.findOne({
       where: {
-        $or: [{ UserId: user1 }, { UserId: user2 }]
+        [Op.or]: [{ UserId: { [Op.eq]: user1 } }, { UserId: { [Op.eq]: user2 } }]
       },
       group: "ConversationId",
-      having: "COUNT(*)>1"
-    });
-    // let conversationID = sequelize.query(
-    // `SELECT ConversationId FROM userConversations
-    // WHERE UserId=? or UserId=?
-    // GROUP BY ConversationId
-    // HAVING COUNT(*)>1;`,
-    // {
-    //   replacements: [user1, user2]
-    // }
-    // );
+      having: [db.sequelize.fn("COUNT", db.sequelize.col("ConversationId")>1")]
+    })
+      // console.log(db);
 
-    console.log(`Conversation ID after query: ${conversationID}`);
+      // let conversationID = db.sequelize
+      //   .query(
+      //     "SELECT ConversationId FROM userConversations \
+      // WHERE UserId=? or UserId=? \
+      // GROUP BY ConversationId \
+      // HAVING COUNT(*)>1;",
+      //     {
+      //       replacements: [user1, user2],
+      //       type: db.sequelize.QueryTypes.SELECT
+      //     }
+      //   )
+      .then(userConversation => {
+        console.log(
+          `Conversation ID after query: ${userConversation.conversationID}`
+        );
+      });
+
     if (conversationID === null) {
       // create a new conversation
       const newConversation = db.Conversation.create();
