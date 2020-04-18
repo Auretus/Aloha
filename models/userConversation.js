@@ -10,9 +10,12 @@ module.exports = function(sequelize) {
       onDelete: "cascade"
     });
     models.Conversation.belongsToMany(models.User, {
-      through: "UserConversation",
-      foreignKey: "conversationRowId"
+      through: "UserConversation"
     });
+    models.User.hasMany(models.UserConversation);
+    models.UserConversation.belongsTo(models.User);
+    models.Conversation.hasMany(models.UserConversation);
+    models.UserConversation.belongsTo(models.Conversation);
   };
   return UserConversation;
 };
