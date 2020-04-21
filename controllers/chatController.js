@@ -29,4 +29,6 @@ router.get("/", function(req, res) {
   res.render("index", users);
 });
 
+router.post();
+
 module.exports = router;

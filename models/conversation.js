@@ -1,19 +1,10 @@
-module.exports = function(sequelize, DataTypes) {
-  const Conversation = sequelize.define("Conversation", {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
-  });
+module.exports = function(sequelize) {
+  const Conversation = sequelize.define("Conversation", {});
   Conversation.associate = models => {
     models.Conversation.hasMany(models.Message, {
       onDelete: "cascade"
     });
+    models.Conversation.hasMany(models.User);
   };
   return Conversation;
 };

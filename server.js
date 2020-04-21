@@ -1,6 +1,3 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
 // Requiring necessary npm packages
 var express = require("express");
 var session = require("express-session");
@@ -63,7 +60,7 @@ io.sockets.on("connection", function(socket) {
   });
 });
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
   server.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
